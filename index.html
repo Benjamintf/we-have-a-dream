@@ -314,13 +314,25 @@
     .projects-grid { grid-template-columns: repeat(2,1fr); }
     .project-card { min-height: 450px; display: flex; flex-direction: column; }
     .project-card.is-hidden { display: none; }
-    .project-mockup {
-      position: relative; min-height: 260px; padding: 20px; overflow: hidden;
-      background: linear-gradient(145deg, #121b32, #0b1120);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      transition: transform 600ms cubic-bezier(.2,.8,.2,1);
-    }
-    .project-card:hover .project-mockup { transform: scale(1.035); }
+    /* የሁሉም የጋራ ዲዛይን */
+.project-mockup {
+    position: relative; 
+    min-height: 260px; 
+    padding: 20px; 
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+/* ለቀጣይ ካርዶች የየራሳቸው የተለያየ ፎቶዎች */
+#proj-one { background-image: url('threee.jpg'); }
+#proj-two { background-image: url('two.jpg'); }
+#proj-three { background-image: url('one.jpg'); }
+#proj-four { background-image: url('four.jpg'); }
+
+.project-card:hover .project-mockup { transform: scale(1.035); }
     .mock-window { height: 100%; min-height: 220px; padding: 12px; border-radius: 15px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
     .mock-head { display:flex; justify-content:space-between; align-items:center; }
     .mock-lines { display:flex; gap:5px; } .mock-lines i { width:6px;height:6px;border-radius:50%;background:#536177; }
@@ -647,19 +659,19 @@
         </div>
         <div class="grid projects-grid" id="projectsGrid">
           <article class="project-card glass reveal" data-category="software">
-            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Business OS</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-mockup" id="proj-one"><div class="mock-window"><div class="mock-head"><span class="dash-label">Business OS</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
             <div class="project-info"><div class="project-meta"><span>Business Software</span><span>Completed</span></div><h3>Business Management System</h3><p>A clean operational dashboard concept for managing everyday business activity.</p><div class="project-link">View Project <span>→</span></div></div>
           </article>
           <article class="project-card glass reveal" data-category="websites">
-            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Commerce</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-mockup" id="proj-two"><div class="mock-window"><div class="mock-head"><span class="dash-label">Commerce</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
             <div class="project-info"><div class="project-meta"><span>Web Development</span><span>Completed</span></div><h3>E-Commerce Website</h3><p>A premium storefront interface designed for product discovery and conversion.</p><div class="project-link">View Project <span>→</span></div></div>
           </article>
           <article class="project-card glass reveal" data-category="webapps">
-            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Journal</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-mockup" id="proj-three"><div class="mock-window"><div class="mock-head"><span class="dash-label">Journal</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
             <div class="project-info"><div class="project-meta"><span>Web Application</span><span>Completed</span></div><h3>Forex Trading Journal</h3><p>A focused journaling workspace for organizing trades, notes, and performance.</p><div class="project-link">View Project <span>→</span></div></div>
           </article>
           <article class="project-card glass reveal" data-category="ai">
-            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">AI Studio</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-mockup" id="proj-four"><div class="mock-window"><div class="mock-head"><span class="dash-label">AI Studio</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
             <div class="project-info"><div class="project-meta"><span>AI Solution</span><span>Concept</span></div><h3>Business AI Assistant</h3><p>A future-ready interface concept for turning business questions into useful actions.</p><div class="project-link">View Project <span>→</span></div></div>
           </article>
         </div>
@@ -774,11 +786,15 @@
           </form>
 
           <div class="contact-stack">
-            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Email placeholder"><small>Email</small><strong>Your email goes here</strong><span>Replace this placeholder with your official email.</span></a>
-            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="WhatsApp placeholder"><small>WhatsApp</small><strong>WhatsApp contact</strong><span>Add your official WhatsApp link when ready.</span></a>
-            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Telegram placeholder"><small>Telegram</small><strong>Telegram contact</strong><span>Add your official Telegram link when ready.</span></a>
-            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Instagram placeholder"><small>Instagram</small><strong>Instagram profile</strong><span>Add your official Instagram URL when ready.</span></a>
-          </div>
+    <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Email placeholder"><small>Email</small><strong>Your email goes here</strong><span>Replace this placeholder with your official email.</span></a>
+    <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="WhatsApp placeholder"><small>WhatsApp</small><strong>WhatsApp contact</strong><span>Add your official WhatsApp link when ready.</span></a>
+    <a class="contact-card glass reveal" href="https://t.me/tk_digital_market" target="_blank" rel="noopener noreferrer" data-placeholder-link aria-label="Telegram profile">
+        <small>Telegram</small>
+        <strong>Telegram contact</strong>
+        <span>Click here to open our official Telegram channel.</span>
+    </a>
+    <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Instagram placeholder"><small>Instagram</small><strong>Instagram profile</strong><span>Add your official Instagram URL when ready.</span></a>
+</div>
         </div>
       </div>
     </section>
