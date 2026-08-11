@@ -1039,6 +1039,28 @@
       // Back to top.
       document.getElementById("backTop").addEventListener("click", () => window.scrollTo({top:0, behavior: reduceMotion ? "auto" : "smooth"}));
     })();
+    const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault(); // ገጹ እንዳይቀየር ይለᴀች
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        document.getElementById('formStatus').innerText = "Thanks! Your message has been sent successfully to your Gmail.";
+        form.reset(); // ፎርሙን ባዶ ያደርገዋል
+    } else {
+        document.getElementById('formStatus').innerText = "Oops! There was a problem submitting your form.";
+    }
+});
   </script>
 </body>
 </html>
