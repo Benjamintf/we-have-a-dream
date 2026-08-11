@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070B14">
+  <title>We Have a Dream | Software Development & Digital Solutions</title>
+  <meta name="description" content="We Have a Dream builds modern websites, custom software, web applications, automation tools, and digital solutions for businesses.">
+  <meta name="keywords" content="software development, website development, web applications, UI UX, business automation, AI solutions">
+  <meta property="og:title" content="We Have a Dream | Software Development & Digital Solutions">
+  <meta property="og:description" content="We turn dreams into digital reality.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <link rel="canonical" href="https://example.com/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23070B14'/%3E%3Cpath d='M26 63c12 12 36 12 48-8' fill='none' stroke='%237C5CFF' stroke-width='9' stroke-linecap='round'/%3E%3Ccircle cx='31' cy='37' r='7' fill='%2300D9FF'/%3E%3C/svg%3E">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    /* =========================================================
+       1. RESET / VARIABLES
+    ========================================================= */
+    :root {
+      --bg: #070B14;
+      --bg-2: #0D1424;
+      --glass: rgba(255,255,255,.07);
+      --glass-hover: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.15);
+      --text: #fff;
+      --muted: #94A3B8;
+      --purple: #7C5CFF;
+      --cyan: #00D9FF;
+      --success: #5ee7a8;
+      --danger: #ff7c9b;
+      --radius-sm: 14px;
+      --radius: 24px;
+      --radius-lg: 34px;
+      --shadow: 0 24px 80px rgba(0,0,0,.34);
+      --transition: 360ms cubic-bezier(.2,.8,.2,1);
+      --max: 1180px;
+      --nav-h: 72px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body {
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(124,92,255,.08), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(0,217,255,.06), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button { border: 0; cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: rgba(124,92,255,.35); color: #fff; }
+
+    /* =========================================================
+       2. GLOBAL
+    ========================================================= */
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    section { position: relative; padding: 110px 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 8px 12px; border: 1px solid var(--border);
+      border-radius: 999px; background: rgba(255,255,255,.04);
+      color: #cbd5e1; font-size: .74rem; font-weight: 800;
+      letter-spacing: .13em; text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 16px var(--cyan);
+    }
+    .section-head { max-width: 760px; margin-bottom: 48px; }
+    .section-head h2 {
+      margin-top: 16px; font: 700 clamp(2.15rem, 5vw, 4.2rem)/1.04 "Space Grotesk", sans-serif;
+      letter-spacing: -.055em;
+    }
+    .section-head p { margin-top: 18px; color: var(--muted); font-size: 1.04rem; max-width: 620px; }
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+    }
+    .grid { display: grid; gap: 20px; }
+    .muted { color: var(--muted); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: fixed; left: 14px; top: -80px; z-index: 1000;
+      padding: 10px 14px; border-radius: 10px; background: #fff; color: #000;
+    }
+    .skip-link:focus { top: 14px; }
+
+    /* =========================================================
+       3. BACKGROUND / PARTICLES
+    ========================================================= */
+    .ambient { position: fixed; inset: 0; pointer-events: none; z-index: -3; overflow: hidden; }
+    .blob {
+      position: absolute; width: 32vw; height: 32vw; min-width: 280px; min-height: 280px;
+      border-radius: 50%; filter: blur(80px); opacity: .16;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .blob.one { background: var(--purple); left: -12vw; top: 4vh; }
+    .blob.two { background: var(--cyan); right: -14vw; top: 38vh; animation-delay: -7s; }
+    .grid-bg {
+      position: absolute; inset: 0; opacity: .14;
+      background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
+
+    /* =========================================================
+       4. NAVBAR
+    ========================================================= */
+    .site-nav {
+      position: fixed; z-index: 100; top: 18px; left: 50%;
+      width: min(calc(100% - 28px), 1120px); transform: translateX(-50%);
+      min-height: var(--nav-h); padding: 10px 12px 10px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-radius: 22px; background: rgba(10,15,28,.58);
+      border: 1px solid rgba(255,255,255,.13);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      transition: var(--transition);
+    }
+    .site-nav.scrolled {
+      background: rgba(8,12,23,.82);
+      box-shadow: 0 16px 50px rgba(0,0,0,.35);
+      border-color: rgba(255,255,255,.19);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .08em; font-size: .78rem; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(0,217,255,.7));
+      box-shadow: 0 8px 28px rgba(124,92,255,.24);
+      font-family: "Space Grotesk", sans-serif; font-weight: 800;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      position: relative; padding: 10px 13px; border-radius: 12px;
+      color: #cbd5e1; font-size: .86rem; font-weight: 600; transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff; background: rgba(255,255,255,.06);
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 50%; bottom: 5px; width: 0; height: 2px;
+      transform: translateX(-50%); border-radius: 2px;
+      background: linear-gradient(90deg,var(--purple),var(--cyan)); transition: var(--transition);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 22px; }
+    .nav-cta { margin-left: 8px; }
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border-radius: 13px;
+      color: #fff; background: rgba(255,255,255,.06); border: 1px solid var(--border);
+    }
+    .menu-toggle span { display: block; width: 20px; height: 2px; background: #fff; margin: 5px auto; transition: var(--transition); }
+    .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-7px) rotate(-45deg); }
+
+    /* =========================================================
+       5. BUTTONS
+    ========================================================= */
+    .btn {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 50px; padding: 0 19px; border-radius: 15px; font-weight: 800;
+      font-size: .88rem; transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      will-change: transform; overflow: hidden;
+    }
+    .btn::before {
+      content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 15%, rgba(255,255,255,.2), transparent 85%);
+      transform: translateX(-120%); transition: transform 600ms ease;
+    }
+    .btn:hover::before { transform: translateX(120%); }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px solid var(--cyan); outline-offset: 3px;
+    }
+    .btn-primary {
+      color: #fff; background: linear-gradient(135deg, #7655ff, #35bdf7);
+      box-shadow: 0 14px 40px rgba(124,92,255,.22);
+    }
+    .btn-primary:hover { box-shadow: 0 18px 50px rgba(124,92,255,.34); }
+    .btn-secondary { color: #fff; background: rgba(255,255,255,.055); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
+    .btn[disabled] { opacity: .65; cursor: wait; transform: none; }
+
+    /* =========================================================
+       6. HERO
+    ========================================================= */
+    .hero { min-height: 100svh; display: grid; align-items: center; padding-top: 150px; overflow: hidden; }
+    .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+    .hero-copy h1 {
+      margin-top: 20px; max-width: 760px;
+      font: 800 clamp(3.15rem, 7.1vw, 6.8rem)/.93 "Space Grotesk", sans-serif;
+      letter-spacing: -.075em;
+    }
+    .gradient-text {
+      background: linear-gradient(110deg, #fff 10%, #bdb3ff 55%, #66e7ff 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-copy > p { margin-top: 26px; max-width: 610px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.16rem); }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .hero-note { display: flex; gap: 16px; align-items: center; margin-top: 30px; color: #64748b; font-size: .78rem; }
+    .hero-note strong { color: #cbd5e1; }
+    .hero-note span { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); }
+
+    .hero-visual { position: relative; min-height: 500px; display: grid; place-items: center; }
+    .orbit {
+      position: absolute; width: 430px; height: 430px; border-radius: 50%;
+      border: 1px solid rgba(124,92,255,.17); transform: rotate(-18deg);
+    }
+    .orbit::before, .orbit::after {
+      content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 30px var(--cyan);
+    }
+    .orbit::before { left: 18%; top: 2%; }
+    .orbit::after { right: 10%; bottom: 18%; background: var(--purple); box-shadow: 0 0 30px var(--purple); }
+    .dashboard {
+      position: relative; z-index: 2; width: min(100%, 470px); min-height: 400px; padding: 22px;
+      border-radius: 32px; transform: rotate(2deg);
+      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+      border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(28px);
+      box-shadow: 0 35px 100px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.13);
+      animation: float 6s ease-in-out infinite;
+    }
+    .dash-top { display: flex; justify-content: space-between; align-items: center; }
+    .dash-dots { display: flex; gap: 6px; }
+    .dash-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.25); }
+    .dash-label { color: #aab6ca; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+    .dash-title { margin-top: 42px; font: 700 2rem/1.1 "Space Grotesk"; }
+    .dash-title span { color: var(--cyan); }
+    .dash-chart {
+      position: relative; height: 135px; margin-top: 25px; overflow: hidden; border-radius: 18px;
+      background: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size: 40px 40px;
+    }
+    .dash-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .dash-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
+    .dash-mini { padding: 13px; border-radius: 15px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); }
+    .dash-mini b { display: block; font-size: 1rem; }
+    .dash-mini small { color: #718096; font-size: .62rem; }
+    .float-card {
+      position: absolute; z-index: 3; padding: 14px 16px; border-radius: 17px;
+      background: rgba(10,15,28,.7); border: 1px solid var(--border); backdrop-filter: blur(18px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.3); font-size: .78rem; animation: float 5s ease-in-out infinite reverse;
+    }
+    .float-card strong { display: block; font-size: .9rem; }
+    .float-card small { color: var(--muted); }
+    .float-card.a { top: 9%; left: -2%; }
+    .float-card.b { right: -1%; bottom: 9%; animation-delay: -2s; }
+
+    /* =========================================================
+       7. SERVICES
+    ========================================================= */
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .service-card, .why-card, .project-card, .testimonial-card, .contact-card {
+      position: relative; overflow: hidden; border-radius: var(--radius); transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .service-card::before, .project-card::before, .why-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(124,92,255,.18), transparent 62%);
+      opacity: 0; transition: opacity var(--transition); pointer-events: none;
+    }
+    .service-card:hover, .project-card:hover, .why-card:hover { transform: translateY(-8px) scale(1.012); background: var(--glass-hover); border-color: rgba(255,255,255,.27); box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .service-card:hover::before, .project-card:hover::before, .why-card:hover::before { opacity: 1; }
+    .service-card { min-height: 260px; padding: 26px; }
+    .service-number { color: #65738a; font: 700 .72rem "Space Grotesk"; letter-spacing: .12em; }
+    .service-icon {
+      width: 48px; height: 48px; margin: 28px 0 25px; display: grid; place-items: center;
+      border-radius: 15px; color: #fff; background: linear-gradient(135deg,rgba(124,92,255,.22),rgba(0,217,255,.11));
+      border: 1px solid rgba(255,255,255,.12); transition: transform var(--transition);
+    }
+    .service-icon svg { width: 22px; height: 22px; }
+    .service-card:hover .service-icon { transform: rotate(-7deg) scale(1.08); }
+    .service-card h3 { font: 700 1.18rem "Space Grotesk"; }
+    .service-card p { margin-top: 9px; color: var(--muted); font-size: .88rem; }
+
+    /* =========================================================
+       8. WHY
+    ========================================================= */
+    .why-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: start; }
+    .why-copy h2 { margin-top: 16px; font: 700 clamp(2.4rem,5vw,4.6rem)/1 "Space Grotesk"; letter-spacing: -.06em; }
+    .why-copy p { margin-top: 20px; color: var(--muted); }
+    .why-grid { grid-template-columns: repeat(2,1fr); }
+    .why-card { padding: 28px; min-height: 190px; }
+    .why-card .num { color: var(--cyan); font: 800 .76rem "Space Grotesk"; }
+    .why-card h3 { margin-top: 34px; font: 700 1.25rem "Space Grotesk"; }
+    .why-card p { margin-top: 8px; color: var(--muted); font-size: .86rem; }
+
+    /* =========================================================
+       9. PROJECTS
+    ========================================================= */
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .filter-btn {
+      padding: 10px 15px; border-radius: 999px; color: #94a3b8;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      transition: var(--transition); font-size: .76rem; font-weight: 800; letter-spacing: .04em;
+    }
+    .filter-btn:hover, .filter-btn.active { color: #fff; background: rgba(124,92,255,.16); border-color: rgba(124,92,255,.42); }
+    .projects-grid { grid-template-columns: repeat(2,1fr); }
+    .project-card { min-height: 450px; display: flex; flex-direction: column; }
+    .project-card.is-hidden { display: none; }
+    .project-mockup {
+      position: relative; min-height: 260px; padding: 20px; overflow: hidden;
+      background: linear-gradient(145deg, #121b32, #0b1120);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+    }
+    .project-card:hover .project-mockup { transform: scale(1.035); }
+    .mock-window { height: 100%; min-height: 220px; padding: 12px; border-radius: 15px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+    .mock-head { display:flex; justify-content:space-between; align-items:center; }
+    .mock-lines { display:flex; gap:5px; } .mock-lines i { width:6px;height:6px;border-radius:50%;background:#536177; }
+    .mock-body { display:grid; grid-template-columns: 78px 1fr; gap:10px; margin-top:13px; }
+    .mock-side, .mock-panel { border-radius:10px; background:rgba(255,255,255,.05); }
+    .mock-side { min-height:175px; }
+    .mock-panel { padding:10px; min-height:175px; }
+    .mock-bars { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+    .mock-bars span { height:28px; border-radius:6px; background:linear-gradient(135deg,rgba(124,92,255,.5),rgba(0,217,255,.22)); }
+    .mock-graph { height:75px; margin-top:10px; border-radius:8px; background: linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:20px 20px; }
+    .project-info { padding: 24px; display:flex; flex:1; flex-direction:column; }
+    .project-meta { display:flex; justify-content:space-between; gap:12px; color:#78869b; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+    .project-info h3 { margin-top:12px; font:700 1.3rem "Space Grotesk"; }
+    .project-info p { margin-top:7px; color:var(--muted); font-size:.86rem; }
+    .project-link { margin-top:auto; padding-top:22px; color:#fff; font-size:.8rem; font-weight:800; }
+    .project-link span { display:inline-block; transition:transform var(--transition); }
+    .project-card:hover .project-link span { transform: translate(5px,-3px); }
+
+    /* =========================================================
+       10. PROCESS
+    ========================================================= */
+    .process-list { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; }
+    .process-step { position:relative; padding: 10px 24px 20px 0; }
+    .process-step:not(:last-child)::after {
+      content:""; position:absolute; top:30px; left:62px; width:calc(100% - 55px); height:1px;
+      background:linear-gradient(90deg,rgba(124,92,255,.7),rgba(0,217,255,.08));
+    }
+    .process-dot {
+      position:relative; z-index:2; width:58px;height:58px;display:grid;place-items:center;border-radius:18px;
+      background:rgba(255,255,255,.06);border:1px solid var(--border);color:#fff;font:700 .8rem "Space Grotesk";
+    }
+    .process-step h3 { margin-top:24px; font:700 1rem "Space Grotesk"; }
+    .process-step p { margin-top:7px; color:var(--muted); font-size:.78rem; }
+
+    /* =========================================================
+       11. ABOUT / STATS
+    ========================================================= */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .about-main { padding:36px; border-radius:var(--radius-lg); }
+    .about-main h2 { margin-top:15px; font:700 clamp(2.3rem,5vw,4.2rem)/1 "Space Grotesk"; letter-spacing:-.055em; }
+    .about-main > p { margin-top:22px; color:var(--muted); max-width:590px; }
+    .about-triad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:34px; }
+    .about-triad article { padding:18px; border-radius:17px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+    .about-triad b { font-size:.74rem; letter-spacing:.1em; }
+    .about-triad p { margin-top:7px; color:#77859a; font-size:.72rem; }
+    .dream-panel { min-height:100%; padding:28px; border-radius:var(--radius-lg); display:flex; flex-direction:column; justify-content:center; }
+    .dream-flow { display:grid; gap:9px; margin-top:25px; }
+    .dream-flow div { display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-radius:16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); }
+    .dream-flow strong { font:700 1rem "Space Grotesk"; }
+    .dream-flow span { color:#6c7a90; font-size:.72rem; }
+    .stats-grid { grid-template-columns:repeat(4,1fr); margin-top:22px; }
+    .stat { padding:28px 24px; border-radius:var(--radius); text-align:center; }
+    .stat strong { display:block; font:800 clamp(2rem,4vw,3.1rem) "Space Grotesk"; }
+    .stat span { color:var(--muted); font-size:.76rem; }
+
+    /* =========================================================
+       12. TESTIMONIALS
+    ========================================================= */
+    .testimonials { grid-template-columns:repeat(3,1fr); }
+    .testimonial-card { padding:28px; min-height:245px; }
+    .stars { color:#d8ccff; letter-spacing:.13em; font-size:.8rem; }
+    .testimonial-card blockquote { margin-top:24px; font:600 1rem/1.55 "Space Grotesk"; }
+    .person { display:flex; align-items:center; gap:11px; margin-top:28px; }
+    .avatar { width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));font-weight:800;font-size:.75rem; }
+    .person b { display:block; font-size:.78rem; }
+    .person small { color:var(--muted); font-size:.68rem; }
+
+    /* =========================================================
+       13. CTA
+    ========================================================= */
+    .cta { padding-top:40px; }
+    .cta-box { position:relative; overflow:hidden; padding:70px 45px; text-align:center; border-radius:38px; }
+    .cta-box::before, .cta-box::after { content:""; position:absolute; border-radius:50%; filter:blur(45px); opacity:.22; }
+    .cta-box::before { width:280px;height:280px;background:var(--purple);left:-90px;top:-120px; }
+    .cta-box::after { width:260px;height:260px;background:var(--cyan);right:-100px;bottom:-130px; }
+    .cta-box > * { position:relative; z-index:1; }
+    .cta-box h2 { margin-top:15px; font:700 clamp(2.4rem,6vw,5.4rem)/.98 "Space Grotesk"; letter-spacing:-.06em; }
+    .cta-box p { max-width:620px; margin:18px auto 28px; color:var(--muted); }
+
+    /* =========================================================
+       14. CONTACT
+    ========================================================= */
+    .contact-layout { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; }
+    .form-card { padding:30px; border-radius:var(--radius-lg); }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .field { display:grid; gap:8px; }
+    .field.full { grid-column:1/-1; }
+    label { color:#abb7c5; font-size:.76rem; font-weight:700; }
+    input, textarea, select {
+      width:100%; border-radius:14px; padding:14px 15px; color:#01bce1;
+      background:rgba(8, 8, 8, 0.045); border:1px solid rgba(13, 13, 13, 0.11);
+      outline:none; transition:var(--transition);
+    }
+    textarea { min-height:150px; resize:vertical; }
+    select { appearance:auto; }
+    input::placeholder, textarea::placeholder { color:#5f6d81; }
+    input:focus, textarea:focus, select:focus { border-color:rgba(0, 9, 10, 0.5); background:rgba(1, 1, 1, 0.065); box-shadow:0 0 0 4px rgba(1, 15, 18, 0.06); }
+    .field.invalid input, .field.invalid textarea, .field.invalid select { border-color:rgba(255,124,155,.7); }
+    .error { min-height:17px; color:var(--danger); font-size:.68rem; }
+    .form-actions { display:flex; align-items:center; gap:14px; margin-top:8px; }
+    .form-status { display:none; padding:12px 14px; border-radius:12px; background:rgba(94,231,168,.08); border:1px solid rgba(94,231,168,.22); color:#a7f3d0; font-size:.75rem; }
+    .form-status.show { display:block; animation:rise .45s ease both; }
+    .contact-stack { display:grid; gap:14px; }
+    .contact-card { display:block; padding:23px; }
+    .contact-card:hover { transform:translateX(5px); background:var(--glass-hover); }
+    .contact-card small { color:#6f7e94; text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; font-weight:800; }
+    .contact-card strong { display:block; margin-top:7px; font:600 1rem "Space Grotesk"; }
+    .contact-card span { display:block; margin-top:4px; color:var(--muted); font-size:.72rem; }
+
+    /* =========================================================
+       15. FOOTER
+    ========================================================= */
+    footer { padding:55px 0 25px; border-top:1px solid rgba(255,255,255,.08); }
+    .footer-grid { display:grid; grid-template-columns:1.4fr .8fr .8fr; gap:40px; }
+    .footer-brand p { max-width:360px; margin-top:14px; color:var(--muted); font-size:.84rem; }
+    .footer-col h3 { font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; color:#fff; }
+    .footer-col a { display:block; margin-top:10px; color:#7e8ba0; font-size:.78rem; transition:var(--transition); }
+    .footer-col a:hover { color:#fff; transform:translateX(3px); }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:45px; padding-top:20px; border-top:1px solid rgba(255,255,255,.07); color:#59677b; font-size:.68rem; }
+    .top-btn { width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:#fff; }
+
+    /* =========================================================
+       16. REVEALS / ANIMATIONS
+    ========================================================= */
+    .reveal { opacity:0; transform:translateY(25px) scale(.985); filter:blur(5px); transition:opacity .8s ease, transform .8s ease, filter .8s ease; }
+    .reveal.visible { opacity:1; transform:none; filter:none; }
+    @keyframes drift { to { transform:translate3d(60px,-40px,0) scale(1.12); } }
+    @keyframes float { 50% { transform:translateY(-10px) rotate(1deg); } }
+    @keyframes rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+    /* =========================================================
+       17. RESPONSIVE
+    ========================================================= */
+    @media (max-width: 1000px) {
+      .hero-inner, .why-layout, .contact-layout { grid-template-columns:1fr; }
+      .hero { padding-top:135px; }
+      .hero-copy { text-align:center; }
+      .hero-copy > p { margin-inline:auto; }
+      .hero-actions, .hero-note { justify-content:center; }
+      .hero-visual { min-height:470px; }
+      .services-grid { grid-template-columns:repeat(2,1fr); }
+      .process-list { grid-template-columns:1fr; gap:22px; }
+      .process-step { padding:0 0 0 82px; }
+      .process-step:not(:last-child)::after { left:28px; top:62px; width:1px; height:calc(100% + 22px); background:linear-gradient(180deg,rgba(124,92,255,.7),rgba(0,217,255,.08)); }
+      .process-dot { position:absolute; left:0; top:0; }
+    }
+    @media (max-width: 760px) {
+      section { padding:82px 0; }
+      .container { width:min(calc(100% - 28px),var(--max)); }
+      .site-nav { top:10px; width:calc(100% - 20px); }
+      .nav-links {
+        position:absolute; left:0; right:0; top:calc(100% + 8px); padding:10px;
+        display:grid; gap:4px; background:rgba(8,12,23,.93); border:1px solid var(--border);
+        border-radius:20px; backdrop-filter:blur(22px); opacity:0; visibility:hidden;
+        transform:translateY(-8px); transition:var(--transition);
+      }
+      .site-nav.menu-open .nav-links { opacity:1; visibility:visible; transform:none; }
+      .nav-links a { padding:14px; }
+      .nav-cta { display:none; }
+      .menu-toggle { display:block; }
+      .hero-copy h1 { font-size:clamp(3rem,14vw,5.2rem); }
+      .hero-visual { min-height:400px; }
+      .dashboard { min-height:350px; padding:16px; }
+      .orbit { width:330px;height:330px; }
+      .float-card { display:none; }
+      .services-grid, .projects-grid, .about-grid, .testimonials, .why-grid, .stats-grid { grid-template-columns:1fr; }
+      .project-card { min-height:420px; }
+      .form-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .footer-brand { grid-column:1/-1; }
+      .footer-bottom { align-items:flex-start; }
+      .about-triad { grid-template-columns:1fr; }
+      .cta-box { padding:55px 22px; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions { display:grid; width:100%; }
+      .hero-actions .btn { width:100%; }
+      .dash-title { font-size:1.6rem; }
+      .dash-cards { grid-template-columns:1fr; }
+      .dash-mini:nth-child(2), .dash-mini:nth-child(3) { display:none; }
+      .project-mockup { min-height:230px; }
+      .mock-body { grid-template-columns:55px 1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .footer-brand { grid-column:auto; }
+      .footer-bottom { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+      #particles { display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="ambient" aria-hidden="true">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="grid-bg"></div>
+    <canvas id="particles"></canvas>
+  </div>
+
+  <header>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="We Have a Dream home">
+        <span class="brand-mark">W</span>
+        <span>WE HAVE A DREAM</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-primary nav-cta" href="#contact">Start a Project <span>→</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Digital products • Software • Growth</span>
+          <h1>WE TURN <span class="gradient-text">DREAMS</span> INTO DIGITAL REALITY.</h1>
+          <p>We design and build modern websites, software, and digital experiences that help businesses grow.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary magnetic" href="#contact">Start a Project <span>→</span></a>
+            <a class="btn btn-secondary" href="#projects">Explore Our Work <span>↗</span></a>
+          </div>
+          <div class="hero-note">
+            <strong>Built for ambitious businesses</strong><span></span><span>Strategy to launch</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="orbit"></div>
+          <div class="float-card a"><strong>01 / DIGITAL</strong><small>Ideas → Products</small></div>
+          <div class="float-card b"><strong>24/7 MINDSET</strong><small>Always building better</small></div>
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-dots"><i></i><i></i><i></i></div>
+              <span class="dash-label">Digital Solutions</span>
+            </div>
+            <div class="dash-title">SOFTWARE<br><span>THAT MOVES.</span></div>
+            <div class="dash-chart" aria-hidden="true">
+              <svg viewBox="0 0 500 160" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" x2="1">
+                    <stop offset="0" stop-color="#7C5CFF"/>
+                    <stop offset="1" stop-color="#00D9FF"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0 125 C45 112,58 132,92 105 S148 90,178 101 S220 65,250 82 S300 100,326 61 S380 55,410 68 S450 25,500 36" fill="none" stroke="url(#chartGradient)" stroke-width="4"/>
+              </svg>
+            </div>
+            <div class="dash-cards">
+              <div class="dash-mini"><b>Web</b><small>Experiences</small></div>
+              <div class="dash-mini"><b>Apps</b><small>Systems</small></div>
+              <div class="dash-mini"><b>AI</b><small>Automation</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Capabilities</span>
+          <h2>WHAT WE BUILD</h2>
+          <p>Technology designed around your business.</p>
+        </div>
+        <div class="grid services-grid">
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 01</span><div class="service-icon">⌘</div><h3>Website Development</h3><p>Modern, responsive websites designed for businesses, brands, and professionals.</p></article>
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 02</span><div class="service-icon">▦</div><h3>Business Software</h3><p>Custom software that helps businesses manage their daily operations.</p></article>
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 03</span><div class="service-icon">◇</div><h3>Web Applications</h3><p>Powerful web applications built around your specific business needs.</p></article>
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 04</span><div class="service-icon">◈</div><h3>UI/UX Design</h3><p>Clean and intuitive interfaces designed to create better user experiences.</p></article>
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 05</span><div class="service-icon">↗</div><h3>Business Automation</h3><p>Automate repetitive tasks and make your business faster and more efficient.</p></article>
+          <article class="service-card glass reveal"><span class="service-number">SERVICE 06</span><div class="service-icon">✦</div><h3>AI Solutions</h3><p>AI-powered tools and intelligent features for modern businesses.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section>
+      <div class="container why-layout">
+        <div class="why-copy reveal">
+          <span class="eyebrow">Our mindset</span>
+          <h2>WE DON'T JUST BUILD SOFTWARE.<br><span class="gradient-text">WE BUILD POSSIBILITIES.</span></h2>
+          <p>Good technology removes friction. Great technology creates momentum. We focus on making ambitious ideas useful, clear, and ready for growth.</p>
+        </div>
+        <div class="grid why-grid">
+          <article class="why-card glass reveal"><span class="num">01 — INNOVATION</span><h3>Better ways to solve problems.</h3><p>We question assumptions and search for practical, modern solutions.</p></article>
+          <article class="why-card glass reveal"><span class="num">02 — SIMPLICITY</span><h3>Complex technology, simple experience.</h3><p>Powerful products should feel intuitive to the people using them.</p></article>
+          <article class="why-card glass reveal"><span class="num">03 — QUALITY</span><h3>Professional by design.</h3><p>We care about reliable behavior, clean interfaces, and polished details.</p></article>
+          <article class="why-card glass reveal"><span class="num">04 — GROWTH</span><h3>Built to move the business forward.</h3><p>We design digital products with real business outcomes in mind.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Selected work</span>
+          <h2>OUR WORK</h2>
+          <p>Turning ideas into useful digital products.</p>
+        </div>
+        <div class="filters reveal" role="group" aria-label="Project filters">
+          <button class="filter-btn active" data-filter="all">ALL</button>
+          <button class="filter-btn" data-filter="websites">WEBSITES</button>
+          <button class="filter-btn" data-filter="software">SOFTWARE</button>
+          <button class="filter-btn" data-filter="webapps">WEB APPS</button>
+          <button class="filter-btn" data-filter="ai">AI</button>
+        </div>
+        <div class="grid projects-grid" id="projectsGrid">
+          <article class="project-card glass reveal" data-category="software">
+            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Business OS</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-info"><div class="project-meta"><span>Business Software</span><span>Completed</span></div><h3>Business Management System</h3><p>A clean operational dashboard concept for managing everyday business activity.</p><div class="project-link">View Project <span>→</span></div></div>
+          </article>
+          <article class="project-card glass reveal" data-category="websites">
+            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Commerce</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-info"><div class="project-meta"><span>Web Development</span><span>Completed</span></div><h3>E-Commerce Website</h3><p>A premium storefront interface designed for product discovery and conversion.</p><div class="project-link">View Project <span>→</span></div></div>
+          </article>
+          <article class="project-card glass reveal" data-category="webapps">
+            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">Journal</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-info"><div class="project-meta"><span>Web Application</span><span>Completed</span></div><h3>Forex Trading Journal</h3><p>A focused journaling workspace for organizing trades, notes, and performance.</p><div class="project-link">View Project <span>→</span></div></div>
+          </article>
+          <article class="project-card glass reveal" data-category="ai">
+            <div class="project-mockup"><div class="mock-window"><div class="mock-head"><span class="dash-label">AI Studio</span><div class="mock-lines"><i></i><i></i><i></i></div></div><div class="mock-body"><div class="mock-side"></div><div class="mock-panel"><div class="mock-bars"><span></span><span></span><span></span><span></span></div><div class="mock-graph"></div></div></div></div></div>
+            <div class="project-info"><div class="project-meta"><span>AI Solution</span><span>Concept</span></div><h3>Business AI Assistant</h3><p>A future-ready interface concept for turning business questions into useful actions.</p><div class="project-link">View Project <span>→</span></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Our process</span>
+          <h2>FROM DREAM TO REALITY</h2>
+        </div>
+        <div class="process-list">
+          <article class="process-step reveal"><div class="process-dot">01</div><h3>DISCOVER</h3><p>Understand the idea, business, users, and goals.</p></article>
+          <article class="process-step reveal"><div class="process-dot">02</div><h3>PLAN</h3><p>Define structure, features, technology, and direction.</p></article>
+          <article class="process-step reveal"><div class="process-dot">03</div><h3>DESIGN</h3><p>Create the user experience and visual system.</p></article>
+          <article class="process-step reveal"><div class="process-dot">04</div><h3>BUILD</h3><p>Develop, test, refine, and prepare the product.</p></article>
+          <article class="process-step reveal"><div class="process-dot">05</div><h3>LAUNCH</h3><p>Deploy the product and prepare it for real users.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <article class="about-main glass reveal">
+            <span class="eyebrow">Who we are</span>
+            <h2>WE HAVE A DREAM.</h2>
+            <p>Every great product begins with an idea. Our mission is to turn those ideas into useful, beautiful, and powerful digital products.</p>
+            <div class="about-triad">
+              <article><b>MISSION</b><p>Turn ambitious ideas into useful digital products.</p></article>
+              <article><b>VISION</b><p>Make professional technology more accessible to businesses.</p></article>
+              <article><b>VALUES</b><p>Clarity, creativity, quality, ownership, growth.</p></article>
+            </div>
+          </article>
+          <aside class="dream-panel glass reveal">
+            <span class="eyebrow">The journey</span>
+            <div class="dream-flow">
+              <div><strong>DREAM</strong><span>01</span></div>
+              <div><strong>DESIGN</strong><span>02</span></div>
+              <div><strong>BUILD</strong><span>03</span></div>
+              <div><strong>GROW</strong><span>04</span></div>
+            </div>
+          </aside>
+        </div>
+        <div class="grid stats-grid">
+          <div class="stat glass reveal"><strong data-count="10" data-suffix="+">0</strong><span>Projects</span></div>
+          <div class="stat glass reveal"><strong data-count="5" data-suffix="+">0</strong><span>Digital Solutions</span></div>
+          <div class="stat glass reveal"><strong data-count="100" data-suffix="%">0</strong><span>Commitment</span></div>
+          <div class="stat glass reveal"><strong data-count="24" data-suffix="/7">0</strong><span>Digital Mindset</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Client perspective</span>
+          <h2>WHAT PEOPLE SAY</h2>
+          <p>Placeholder testimonials are structured here so they can be replaced with verified customer reviews later.</p>
+        </div>
+        <div class="grid testimonials">
+          <article class="testimonial-card glass reveal"><div class="stars">★★★★★</div><blockquote>“We Have a Dream transformed our idea into a professional digital product.”</blockquote><div class="person"><div class="avatar">A</div><div><b>Alex Morgan</b><small>Business Owner</small></div></div></article>
+          <article class="testimonial-card glass reveal"><div class="stars">★★★★★</div><blockquote>“The process was clear, the interface was polished, and the result felt built for our business.”</blockquote><div class="person"><div class="avatar">S</div><div><b>Sarah Kim</b><small>Founder</small></div></div></article>
+          <article class="testimonial-card glass reveal"><div class="stars">★★★★★</div><blockquote>“They helped us turn a complicated workflow into something our team could actually use.”</blockquote><div class="person"><div class="avatar">D</div><div><b>Daniel Reed</b><small>Operations Lead</small></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box glass reveal">
+          <span class="eyebrow">Your next move</span>
+          <h2>HAVE A DREAM?<br><span class="gradient-text">LET'S BUILD IT.</span></h2>
+          <p>Tell us what you want to create and let's turn your idea into something real.</p>
+          <a class="btn btn-primary magnetic" href="#contact">Start Your Project <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Let's talk</span>
+          <h2>LET'S BUILD SOMETHING GREAT.</h2>
+          <p>Tell us what you're imagining. This frontend form is ready to be connected to your preferred backend or form service.</p>
+        </div>
+        <div class="contact-layout">
+          <form
+  class="form-card glass"
+  id="contactForm"
+  action="https://formspree.io/f/xljrbbng"
+  method="POST"
+  novalidate
+>
+            <div class="form-grid">
+              <div class="field"><label for="name">Name *</label><input id="name" name="name" autocomplete="name" placeholder="Your name" required><span class="error" data-error-for="name"></span></div>
+              <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><span class="error" data-error-for="email"></span></div>
+              <div class="field"><label for="business">Business Name</label><input id="business" name="business" autocomplete="organization" placeholder="Your business"></div>
+              <div class="field"><label for="projectType">Project Type *</label><select id="projectType" name="projectType" required><option value="">Choose a service</option><option>Website</option><option>Business Software</option><option>Web Application</option><option>UI/UX Design</option><option>Automation</option><option>AI Solution</option><option>Other</option></select><span class="error" data-error-for="projectType"></span></div>
+              <div class="field full"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Tell us about your dream..." required></textarea><span class="error" data-error-for="message"></span></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" id="submitBtn" type="submit">Send Message <span>→</span></button>
+              <div class="form-status" id="formStatus" role="status" aria-live="polite">Thanks — your message passed validation and is ready for your backend.</div>
+            </div>
+          </form>
+
+          <div class="contact-stack">
+            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Email placeholder"><small>Email</small><strong>Your email goes here</strong><span>Replace this placeholder with your official email.</span></a>
+            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="WhatsApp placeholder"><small>WhatsApp</small><strong>WhatsApp contact</strong><span>Add your official WhatsApp link when ready.</span></a>
+            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Telegram placeholder"><small>Telegram</small><strong>Telegram contact</strong><span>Add your official Telegram link when ready.</span></a>
+            <a class="contact-card glass reveal" href="#" data-placeholder-link aria-label="Instagram placeholder"><small>Instagram</small><strong>Instagram profile</strong><span>Add your official Instagram URL when ready.</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#home"><span class="brand-mark">W</span><span>WE HAVE A DREAM</span></a>
+          <p>Turning ideas into digital reality.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Navigate</h3>
+          <a href="#home">Home</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#about">About</a><a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3>Services</h3>
+          <a href="#services">Website Development</a><a href="#services">Business Software</a><a href="#services">Web Applications</a><a href="#services">Automation</a><a href="#services">AI Solutions</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 We Have a Dream. All Rights Reserved.</span>
+        <button class="top-btn" id="backTop" aria-label="Back to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       WE HAVE A DREAM — Vanilla JavaScript
+       No fake API calls. The form is deliberately ready for
+       a real backend/form service integration later.
+    ========================================================= */
+    (() => {
+      "use strict";
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const nav = document.getElementById("siteNav");
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      // Sticky navbar state.
+      const updateNav = () => nav.classList.toggle("scrolled", window.scrollY > 20);
+      window.addEventListener("scroll", updateNav, { passive: true });
+      updateNav();
+
+      // Mobile navigation.
+      const closeMenu = () => {
+        nav.classList.remove("menu-open");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      };
+      menuToggle.addEventListener("click", () => {
+        const open = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!open));
+        menuToggle.setAttribute("aria-label", open ? "Open navigation menu" : "Close navigation menu");
+        nav.classList.toggle("menu-open", !open);
+        document.body.classList.toggle("menu-open", !open);
+      });
+      navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+      document.addEventListener("click", e => {
+        if (!nav.contains(e.target) && nav.classList.contains("menu-open")) closeMenu();
+      });
+      window.addEventListener("resize", () => { if (window.innerWidth > 760) closeMenu(); });
+
+      // Scroll reveal.
+      const revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window && !reduceMotion) {
+        const revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => revealObserver.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add("visible"));
+      }
+
+      // Active navigation link.
+      const sections = [...document.querySelectorAll("main section[id]")];
+      const navAnchors = [...navLinks.querySelectorAll("a")];
+      if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navAnchors.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id));
+          });
+        }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+        sections.forEach(section => sectionObserver.observe(section));
+      }
+
+      // Card cursor spotlight.
+      if (window.matchMedia("(pointer:fine)").matches && !reduceMotion) {
+        document.querySelectorAll(".service-card, .why-card, .project-card").forEach(card => {
+          card.addEventListener("pointermove", e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+            card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+          });
+        });
+
+        // Subtle magnetic buttons.
+        document.querySelectorAll(".magnetic").forEach(btn => {
+          btn.addEventListener("pointermove", e => {
+            const r = btn.getBoundingClientRect();
+            const x = (e.clientX - r.left - r.width / 2) / r.width;
+            const y = (e.clientY - r.top - r.height / 2) / r.height;
+            btn.style.transform = `translate(${x * 5}px, ${y * 5}px)`;
+          });
+          btn.addEventListener("pointerleave", () => btn.style.transform = "");
+        });
+      }
+
+      // Background particles: lightweight canvas, disabled for reduced motion.
+      const canvas = document.getElementById("particles");
+      if (canvas && !reduceMotion && window.matchMedia("(pointer:fine)").matches) {
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let width = 0, height = 0;
+        const resizeCanvas = () => {
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          width = window.innerWidth; height = window.innerHeight;
+          canvas.width = width * dpr; canvas.height = height * dpr;
+          canvas.style.width = width + "px"; canvas.style.height = height + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          const count = Math.min(75, Math.floor(width / 18));
+          particles = Array.from({length: count}, () => ({
+            x: Math.random()*width, y: Math.random()*height,
+            r: Math.random()*1.3+.3, vx:(Math.random()-.5)*.15, vy:(Math.random()-.5)*.15
+          }));
+        };
+        const draw = () => {
+          ctx.clearRect(0,0,width,height);
+          ctx.fillStyle = "rgba(255,255,255,.45)";
+          particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        };
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas, { passive:true });
+        draw();
+      }
+
+      // Project filters.
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const projectCards = document.querySelectorAll(".project-card");
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          filterButtons.forEach(b => b.classList.remove("active"));
+          button.classList.add("active");
+          const filter = button.dataset.filter;
+          projectCards.forEach(card => {
+            const show = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("is-hidden", !show);
+            if (show && !reduceMotion) {
+              card.animate(
+                [{opacity:.15, transform:"translateY(12px) scale(.98)"}, {opacity:1, transform:"none"}],
+                {duration:380, easing:"cubic-bezier(.2,.8,.2,1)"}
+              );
+            }
+          });
+        });
+      });
+
+      // Animated statistics — once only.
+      const counters = document.querySelectorAll("[data-count]");
+      const animateCounter = el => {
+        const target = Number(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const duration = reduceMotion ? 1 : 1000;
+        const start = performance.now();
+        const tick = now => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(target * eased) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      if ("IntersectionObserver" in window) {
+        const counterObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              counters.forEach(animateCounter);
+              counterObserver.disconnect();
+            }
+          });
+        }, { threshold:.35 });
+        const stats = document.querySelector(".stats-grid");
+        if (stats) counterObserver.observe(stats);
+      } else counters.forEach(animateCounter);
+
+      // Contact validation.
+      const form = document.getElementById("contactForm");
+      const status = document.getElementById("formStatus");
+      const submitBtn = document.getElementById("submitBtn");
+      const getError = name => form.querySelector(`[data-error-for="${name}"]`);
+      const setError = (field, message) => {
+        const wrapper = field.closest(".field");
+        wrapper.classList.toggle("invalid", Boolean(message));
+        const error = getError(field.name);
+        if (error) error.textContent = message || "";
+      };
+      const validate = () => {
+        let valid = true;
+        const name = form.elements.name;
+        const email = form.elements.email;
+        const type = form.elements.projectType;
+        const message = form.elements.message;
+        setError(name, name.value.trim().length < 2 ? "Please enter your name." : "");
+        setError(email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()) ? "Enter a valid email address." : "");
+        setError(type, !type.value ? "Please choose a project type." : "");
+        setError(message, message.value.trim().length < 10 ? "Please tell us a little more about your project." : "");
+        valid = [name,email,type,message].every(field => !field.closest(".field").classList.contains("invalid"));
+        return valid;
+      };
+      form.querySelectorAll("input,textarea,select").forEach(field => {
+        field.addEventListener("blur", validate);
+        field.addEventListener("input", () => {
+          if (field.closest(".field").classList.contains("invalid")) validate();
+        });
+      });
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        status.classList.remove("show");
+        if (!validate()) return;
+        submitBtn.disabled = true;
+        submitBtn.querySelector("span").textContent = "…";
+
+        // BACKEND HOOK:
+        // Replace the simulated delay below with fetch("/your-endpoint", {
+        //   method: "POST", headers: {"Content-Type":"application/json"},
+        //   body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        // })
+        await new Promise(resolve => setTimeout(resolve, 650));
+
+        status.textContent = "Thanks — your message passed validation and is ready for your backend.";
+        status.classList.add("show");
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.querySelector("span").textContent = "→";
+      });
+
+      // Placeholder social/contact links stay harmless until replaced.
+      document.querySelectorAll("[data-placeholder-link]").forEach(link => {
+        link.addEventListener("click", e => e.preventDefault());
+      });
+
+      // Back to top.
+      document.getElementById("backTop").addEventListener("click", () => window.scrollTo({top:0, behavior: reduceMotion ? "auto" : "smooth"}));
+    })();
+  </script>
+</body>
+</html>
